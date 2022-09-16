@@ -6,9 +6,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from time import sleep
 
-
-import os 
-
 from selenium.webdriver.chrome.options import Options
 
 url = 'https://www.zukerman.com.br/?gclid=Cj0KCQjw0oyYBhDGARIsAMZEuMt-ti_O4tfxH4f_w_U8_dfg8ZFLW1QfxPYI5ukcDS5ZopB3kjfHb1waAhXuEALw_wcB'
