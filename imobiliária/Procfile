@@ -1,1 +1,1 @@
-web: python extracao_zukerman.py
+web: python extracao_principal.py
