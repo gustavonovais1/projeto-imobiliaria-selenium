@@ -5,7 +5,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from time import sleep
-import openpyxl
+
+
 import os 
 
 from selenium.webdriver.chrome.options import Options
@@ -14,8 +15,6 @@ url = 'https://www.zukerman.com.br/?gclid=Cj0KCQjw0oyYBhDGARIsAMZEuMt-ti_O4tfxH4
 
 options = Options()
 options.headless = True
-
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
 # Baixando o webdriver
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options = options)
@@ -41,12 +40,6 @@ listaLinks = []
 
 existePagina = True
 primeiraPagina = True
-
-book = openpyxl.Workbook()
-book.create_sheet('dados')
-dados_page = book['dados']
-
-dados_page.append(['Titulo', 'Endereço', 'Praça1', 'Praça2', 'Comitente', 'Lance', 'Avaliaçâo do imovél', 'Situacao', 'Processo', 'Descricao','Edital', 'Laudo de avaliação', 'Matricula', 'Link Atual'])
 
 while existePagina == True:
     
@@ -265,17 +258,6 @@ while existePagina == True:
 
         print('------------------------------------------------------')
 
-        if not'Processo' in processo:
-            try:
-                dados_page.append([titulo, endereco, praca1, praca2, comitente, lance, ' ', situacao, ' ', descricao,' ', ' ', matricula, linkAtual])
-            except NameError:
-                dados_page.append([titulo, endereco, praca1, ' ', comitente, lance , ' ', situacao, ' ', descricao,' ', ' ', matricula, linkAtual])
-        else:
-            try:
-                dados_page.append([titulo, endereco, praca1, praca2, comitente, lance, ' ', situacao, processo, descricao,' ', ' ', matricula, linkAtual])
-            except NameError:
-                dados_page.append([titulo, endereco, praca1, ' ', comitente, lance, ' ', situacao, processo, descricao,' ', ' ', matricula, linkAtual])
-
         existePagina = False
 
 # Abrindo nova aba no navegador
@@ -304,6 +286,11 @@ listaLinks = []
 
 existePagina = True
 primeiraPagina = True
+
+
+
+#dados_page.append(['Titulo', 'Endereço', "Praça1", 'Praça2', 'Comitente', 'Lance' 'Avaliaçâo do imovél', 'Situacao' ,'Processo', 'Descrição', 'Edital', 'Laudo de Avaliação', 'Matricula', 'Link Atual'])
+
 
 while existePagina == True:
     
@@ -490,12 +477,6 @@ while existePagina == True:
         except:
             print("Não foi possível encontrar as informações.")
 
-        try:
-            dados_page.append([titulo, localizacao, praca1, praca2, comitente, lance , ' ', ' ', processo, descricao, linkEdital, linkLaudo, linkMatricula, linkAtual])
-        except NameError:
-            dados_page.append([titulo, localizacao, praca1, praca2, comitente, lance , ' ', ' ', ' ', descricao, linkEdital, ' ', linkMatricula, linkAtual])
-
-
         existePagina = False
 
 # Abrindo nova aba
@@ -569,6 +550,10 @@ while True:
 
 existePagina = True
 primeiraPagina = False
+
+
+
+#dados_page.append(["Titulo", 'Endereço', 'Praca1', 'Praca2','Ctomiente', 'Lance',  'Avaliaçâo do imovél', 'Situacao' , 'Processo',  'Descricao' ,'Edital', 'Laudo de Avaliação', 'Matricula', 'Link Atual'])
 
 sleep(5)
 
@@ -713,19 +698,6 @@ for linkAtual in listaLinks:
             pass
         
         print('Para mais informações acesse: ' + linkAtual)
-
-        if not 'Tipo' in descricao: 
-            try:
-                dados_page.append([titulo, endereco, praca1, praca2, 'Leilão Judicial',  lance,  avaliacaoimovel, ' ', ' ',descricao ,edital, avaliacao, matricula, linkAtual])
-            except:
-                pass
-        else:
-            try:
-                dados_page.append([titulo, endereco, praca1, praca2, 'Leilão Judicial', lance,  avaliacaoimovel, ' ',  ' ',descricao2 ,edital, avaliacao, matricula, linkAtual])
-            except:
-                pass
-
-        book.save('teste.xlsx')
 
         print('-------------------------------------------------')
     except:
