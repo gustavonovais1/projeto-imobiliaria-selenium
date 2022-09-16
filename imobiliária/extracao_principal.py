@@ -14,7 +14,7 @@ options = Options()
 options.headless = True
 
 # Baixando o webdriver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options = options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 # Acessando premiro site zukerman
 driver.get(url)
